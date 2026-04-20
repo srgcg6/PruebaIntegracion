@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taller Mecánico - Registro de Coches</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+      body {
+        font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .background-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .car-float {
+        position: absolute;
+        font-size: 3rem;
+        opacity: 0.5;
+        animation: floatAround infinite linear;
+      }
+
+      @keyframes floatAround {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(100px, 100px) rotate(5deg);
+        }
+        50% {
+          transform: translate(200px, -50px) rotate(-3deg);
+        }
+        75% {
+          transform: translate(-100px, 150px) rotate(8deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+      }
+
+      .car-float:nth-child(1) {
+        top: 10%;
+        left: 10%;
+        animation-duration: 20s;
+        font-size: 4rem;
+      }
+      .car-float:nth-child(2) {
+        top: 30%;
+        left: 70%;
+        animation-duration: 25s;
+        animation-delay: -2s;
+      }
+      .car-float:nth-child(3) {
+        top: 70%;
+        left: 20%;
+        animation-duration: 22s;
+        animation-delay: -5s;
+        font-size: 2.5rem;
+      }
+      .car-float:nth-child(4) {
+        top: 50%;
+        left: 50%;
+        animation-duration: 28s;
+        animation-delay: -10s;
+      }
+      .car-float:nth-child(5) {
+        top: 80%;
+        left: 80%;
+        animation-duration: 18s;
+        animation-delay: -3s;
+        font-size: 3.5rem;
+      }
+      .car-float:nth-child(6) {
+        top: 15%;
+        left: 85%;
+        animation-duration: 30s;
+        animation-delay: -7s;
+      }
+
+      .main-container {
+        max-width: 600px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        position: relative;
+        z-index: 10;
+      }
+
+      h1 {
+        text-align: center;
+        color: #e94560;
+        text-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+        margin-top: 0;
+        font-weight: 700;
+        font-size: 1.8rem;
+      }
+
+      h1::before {
+        content: '🔧 ';
+      }
+
+      h1::after {
+        content: ' 🔧';
+      }
+
+      h2 {
+        color: #e0e0e0;
+        border-bottom: 2px solid rgba(233, 69, 96, 0.4);
+        padding-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      input {
+        padding: 14px 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        font-size: 1rem;
+        font-family: 'Inter', sans-serif;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.07);
+        color: #f0f0f0;
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      input:focus {
+        border-color: #e94560;
+        outline: none;
+        box-shadow: 0 0 15px rgba(233, 69, 96, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      button {
+        padding: 14px 20px;
+        background: linear-gradient(135deg, #e94560, #c23152);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 700;
+        font-family: 'Inter', sans-serif;
+        width: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #ff6b81, #e94560);
+        box-shadow: 0 6px 20px rgba(233, 69, 96, 0.5);
+        transform: translateY(-2px);
+      }
+
+      button:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 10px rgba(233, 69, 96, 0.3);
+      }
+
+      hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(
+          to right,
+          rgba(233, 69, 96, 0),
+          rgba(233, 69, 96, 0.5),
+          rgba(233, 69, 96, 0)
+        );
+        margin: 30px 0;
+      }
+
+      .coche-item {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 12px 0;
+        padding: 18px;
+        border-radius: 12px;
+        border-left: 4px solid #e94560;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        transition: all 0.3s ease;
+      }
+
+      .coche-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .coche-item strong {
+        color: #e94560;
+        font-size: 1.2rem;
+      }
+
+      .coche-info {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 0.9rem;
+      }
+
+      .coche-info span {
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 600;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .coche-item {
+        animation: slideIn 0.4s ease forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-animation">
+      <div class="car-float">🚗</div>
+      <div class="car-float">🚙</div>
+      <div class="car-float">🛠️</div>
+      <div class="car-float">🚘</div>
+      <div class="car-float">⚙️</div>
+      <div class="car-float">🔩</div>
+    </div>
+
+    <div class="main-container">
+      <h1>Taller Mecánico</h1>
+
+      <form id="cocheForm">
+        <div class="form-group">
+          <input
+            type="text"
+            id="name"
+            placeholder="Nombre del propietario"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="matricula"
+            placeholder="Matrícula del vehículo (ej. 1234 ABC)"
+            pattern="[0-9]{4}\s?[A-Za-z]{3}"
+            title="Formato: 4 números y 3 letras (ej. 1234 ABC)"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="problema"
+            placeholder="Problema del vehículo (ej. Fallo en frenos)"
+            required
+          />
+        </div>
+        <button type="submit">Registrar Vehículo</button>
+      </form>
+
+      <hr />
+
+      <h2>Vehículos en el Taller</h2>
+      <div id="listaCoches"></div>
+    </div>
+
+    <script>
+      const API_URL = "http://localhost:3000/coches";
+
+      async function cargarCoches() {
+        try {
+          const response = await fetch(API_URL);
+          const coches = await response.json();
+
+          const contenedor = document.getElementById("listaCoches");
+          contenedor.innerHTML = "";
+
+          coches.forEach((coche) => {
+            const div = document.createElement("div");
+            div.className = "coche-item";
+            div.innerHTML = `
+              <strong>🚗 ${coche.name}</strong>
+              <div class="coche-info">📋 Matrícula: <span>${coche.matricula}</span></div>
+              <div class="coche-info">🔧 Problema: <span>${coche.problema}</span></div>
+            `;
+            contenedor.appendChild(div);
+          });
+        } catch (error) {
+          console.error("Error al cargar los coches:", error);
+          const contenedor = document.getElementById("listaCoches");
+          contenedor.innerHTML =
+            "<p style='color:#e94560; text-align:center;'>Error al conectar con el servidor del taller.</p>";
+        }
+      }
+
+      document
+        .getElementById("cocheForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const nuevoCoche = {
+            name: document.getElementById("name").value,
+            matricula: document.getElementById("matricula").value,
+            problema: document.getElementById("problema").value,
+          };
+
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(nuevoCoche),
+            });
+
+            if (response.ok) {
+              alert("¡Vehículo registrado con éxito en el taller!");
+              document.getElementById("cocheForm").reset();
+              cargarCoches();
+            } else {
+              const errorData = await response.json();
+              alert("Error en el registro: " + errorData.error);
+            }
+          } catch (error) {
+            console.error("Error al registrar:", error);
+            alert("Error de conexión con el servidor del taller.");
+          }
+        });
+
+      cargarCoches();
+    </script>
+  </body>
+</html>
